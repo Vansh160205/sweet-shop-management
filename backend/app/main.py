@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import initialize_database
 from app.routes.authentication_routes import router as auth_router
-
+from app.routes.sweets_routes import router as sweets_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -36,6 +36,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(auth_router)
+app.include_router(sweets_router)
 
 
 @app.get("/")

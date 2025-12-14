@@ -1,7 +1,8 @@
 """
-Pydantic schemas - Auth only for now.
+Pydantic schemas for request/response validation.
 """
 from pydantic import BaseModel, EmailStr, Field, field_validator, ConfigDict
+from typing import Optional
 from datetime import datetime
 
 
@@ -41,5 +42,46 @@ class UserProfileResponse(BaseModel):
     full_name: str
     is_administrator: bool
     account_created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+# ==================== Sweet Product Schemas ====================
+
+class SweetCreationRequest(BaseModel):
+    """Schema for creating a new sweet product."""
+    sweet_name: str = Field(min_length=1, max_length=200)
+    sweet_category: str = Field(min_length=1, max_length=100)
+    sweet_price: float = Field(gt=0, description="Price must be greater than 0")
+    quantity_in_stock: int = Field(ge=0, description="Quantity cannot be negative")
+    sweet_description: Optional[str] = Field(None, max_length=500)
+
+    @field_validator('sweet_name', 'sweet_category')
+    @classmethod
+    def validate_not_empty(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError('Field cannot be empty or just whitespace')
+        return value.strip()
+
+
+class SweetUpdateRequest(BaseModel):
+    """Schema for updating an existing sweet product."""
+    sweet_name: Optional[str] = Field(None, min_length=1, max_length=200)
+    sweet_category: Optional[str] = Field(None, min_length=1, max_length=100)
+    sweet_price: Optional[float] = Field(None, gt=0)
+    quantity_in_stock: Optional[int] = Field(None, ge=0)
+    sweet_description: Optional[str] = Field(None, max_length=500)
+
+
+class SweetProductResponse(BaseModel):
+    """Schema for sweet product data returned to client."""
+    sweet_id: int
+    sweet_name: str
+    sweet_category: str
+    sweet_price: float
+    quantity_in_stock: int
+    sweet_description: Optional[str]
+    product_created_at: datetime
+    product_updated_at: Optional[datetime]
 
     model_config = ConfigDict(from_attributes=True)
