@@ -85,3 +85,26 @@ class SweetProductResponse(BaseModel):
     product_updated_at: Optional[datetime]
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# ==================== Inventory Management Schemas ====================
+
+class PurchaseRequest(BaseModel):
+    """Schema for purchasing sweets."""
+    quantity_to_purchase: int = Field(gt=0, description="Must purchase at least 1 item")
+
+
+class RestockRequest(BaseModel):
+    """Schema for restocking sweets."""
+    quantity_to_add: int = Field(gt=0, description="Must restock at least 1 item")
+
+
+class InventoryOperationResponse(BaseModel):
+    """Schema for inventory operation results."""
+    message: str
+    sweet_id: int
+    sweet_name: str
+    previous_quantity: int
+    new_quantity: int
+    quantity_purchased: Optional[int] = None
+    quantity_added: Optional[int] = None
