@@ -21,7 +21,7 @@ router = APIRouter(prefix="/api/sweets", tags=["Sweets"])
 def create_sweet(
     sweet_data: SweetCreationRequest,
     db: Session = Depends(get_db),
-    current_user: UserAccount = Depends(get_current_user)
+    current_user: UserAccount = Depends(require_admin)
 ):
     """Create a new sweet product."""
     new_sweet = SweetProduct(
@@ -81,7 +81,7 @@ def update_sweet(
     sweet_id: int,
     sweet_data: SweetUpdateRequest,
     db: Session = Depends(get_db),
-    current_user: UserAccount = Depends(get_current_user)
+    current_user: UserAccount = Depends(require_admin)
 ):
     """Update an existing sweet product."""
     sweet = db.query(SweetProduct).filter(SweetProduct.sweet_id == sweet_id).first()
