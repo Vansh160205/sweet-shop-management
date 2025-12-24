@@ -45,6 +45,12 @@ def purchase_sweet(
     # Decrease stock
     sweet.quantity_in_stock -= purchase_data.quantity_to_purchase
     
+    total_price = float(sweet.sweet_price * purchase_data.quantity_to_purchase).__round__(2)
+
+    discounted_price=0
+    if(purchase_data.coupon=='COUPON'):
+        discounted_price= float(0.9 * total_price).__round__(2)
+
     db.commit()
     db.refresh(sweet)
     
@@ -54,7 +60,9 @@ def purchase_sweet(
         "sweet_name": sweet.sweet_name,
         "previous_quantity": previous_quantity,
         "new_quantity": sweet.quantity_in_stock,
-        "quantity_purchased": purchase_data.quantity_to_purchase
+        "quantity_purchased": purchase_data.quantity_to_purchase,
+        "total_price":total_price,
+        "discounted_price":discounted_price
     }
 
 

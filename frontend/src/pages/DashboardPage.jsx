@@ -114,44 +114,6 @@ const DashboardPage = () => {
             )}
           </div>
 
-          {/* Stats Cards */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-purple-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Products</p>
-                  <p className="text-3xl font-bold text-purple-600">{sweets.length}</p>
-                </div>
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  📦
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-pink-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Stock Value</p>
-                  <p className="text-3xl font-bold text-pink-600">₹{totalValue.toFixed(2)}</p>
-                </div>
-                <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
-                  💰
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-yellow-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Items</p>
-                  <p className="text-3xl font-bold text-yellow-600">{totalItems}</p>
-                </div>
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                  🍬
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
 
         {/* Search */}

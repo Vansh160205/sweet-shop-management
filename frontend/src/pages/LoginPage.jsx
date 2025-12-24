@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import ErrorMessage from '../components/common/ErrorMessage';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

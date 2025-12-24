@@ -5,7 +5,6 @@ const SweetCard = ({ sweet, isAdmin, onEdit, onDelete, onPurchase, onRestock }) 
   const [purchaseQty, setPurchaseQty] = useState(1);
   const [restockQty, setRestockQty] = useState(10);
   const [showRestock, setShowRestock] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const isOutOfStock = sweet.quantity_in_stock === 0;
   const isLowStock = sweet.quantity_in_stock < 10;

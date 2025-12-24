@@ -3,7 +3,7 @@ import pytest
 
 # ==================== HELPER FUNCTION ====================
 
-def get_auth_header(client, email="user@test.com", password="UserPass123", is_admin=False):
+def get_auth_header(client, email="admin@dg.in", password="admin123", is_admin=True):
     """Helper to register, login and get auth header."""
     client.post("/api/auth/register", json={
         "email_address": email,
@@ -28,6 +28,7 @@ def create_sweet(client, headers, name="Test Sweet", quantity=100):
         "quantity_in_stock": quantity,
         "sweet_description": "Test sweet"
     }, headers=headers)
+    print(" Sweet Response : ",response.json())
     return response.json()["sweet_id"]
 
 
@@ -48,6 +49,26 @@ def test_purchase_sweet_success(client):
     assert data["previous_quantity"] == 100
     assert data["new_quantity"] == 90
     assert data["quantity_purchased"] == 10
+
+def test_purchase_sweet_success_with_coupon(client):
+    headers = get_auth_header(client)
+    sweet_id = create_sweet(client, headers, quantity=100)
+    
+    response = client.post(f"/api/sweets/{sweet_id}/purchase", json={
+        "quantity_to_purchase": 10,
+        "coupon":"COUPON",
+    }, headers=headers)
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["message"] == "Purchase successful"
+    assert data["sweet_id"] == sweet_id
+    assert data["previous_quantity"] == 100
+    assert data["new_quantity"] == 90
+    assert data["quantity_purchased"] == 10
+    assert data["total_price"] == 59.9 
+    assert data["discounted_price"] == 53.91
+
 
 
 def test_purchase_sweet_reduces_stock(client):

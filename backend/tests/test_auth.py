@@ -7,6 +7,7 @@ def test_register_user_success(client):
         "password": "SweetPass123!",
         "full_name": "Vanilla Lover"
     })
+    
     assert response.status_code == 201
     data = response.json()
     assert data["email_address"] == "vanilla@example.com"

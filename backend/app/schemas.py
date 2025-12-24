@@ -25,7 +25,7 @@ class UserRegistrationRequest(BaseModel):
 
 class UserLoginRequest(BaseModel):
     """Schema for user login."""
-    email_address: EmailStr
+    username: EmailStr
     password: str
 
 
@@ -92,6 +92,7 @@ class SweetProductResponse(BaseModel):
 class PurchaseRequest(BaseModel):
     """Schema for purchasing sweets."""
     quantity_to_purchase: int = Field(gt=0, description="Must purchase at least 1 item")
+    coupon: Optional[str]
 
 
 class RestockRequest(BaseModel):
@@ -106,5 +107,7 @@ class InventoryOperationResponse(BaseModel):
     sweet_name: str
     previous_quantity: int
     new_quantity: int
+    total_price: Optional[float]
+    discounted_price: Optional[float]
     quantity_purchased: Optional[int] = None
     quantity_added: Optional[int] = None
