@@ -740,7 +740,7 @@ Co-authored-by: Claude <claude@anthropic.com>
 ## 👤 Author
 
 **Vansh Vagadia**
-- GitHub: [@vansh-vagadia](https://github.com/vansh-vagadia)
+- GitHub: [@Vansh160205](https://github.com/Vansh160205)
 - Email: vanshvagadia1602@gmail.com
 
 ---
